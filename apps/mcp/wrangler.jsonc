@@ -60,10 +60,10 @@
     "WORKOS_ORGANIZATION_ID": "org_01KRDAB894DJF5V38PT5617TV1",
     "WORKOS_ALLOWED_ORG_IDS": "org_01KRDAB894DJF5V38PT5617TV1",
     "WORKOS_REQUIRED_PERMISSION": "mongodb:access",
-    // Outbound M2M client_id for calling bulk-place-agent ("Nyuchi Fundi
-    // Tester" — its secret is a `wrangler secret put BULK_M2M_CLIENT_SECRET`,
-    // never a var).
-    "BULK_M2M_CLIENT_ID": "client_01KSJT4TC5GW6RHTKMHB3C9500",
+    // Outbound M2M client_id for calling bulk-place-agent ("Kweli Fundi" —
+    // its secret is a `wrangler secret put BULK_M2M_CLIENT_SECRET`, never a
+    // var).
+    "BULK_M2M_CLIENT_ID": "client_01KZGMK14B53N6Z84GMJFW0ASC",
     // Outbound M2M client_id for calling single-place-agent ("Kweli" — its
     // secret is a `wrangler secret put SINGLE_M2M_CLIENT_SECRET`).
     "SINGLE_M2M_CLIENT_ID": "client_01KZG8V8VVS6268W1ERMW7YBNE"

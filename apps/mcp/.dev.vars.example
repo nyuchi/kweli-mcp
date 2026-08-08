@@ -12,8 +12,10 @@ COOKIE_ENCRYPTION_KEY="..."
 # Never share these between the two agents, and never reuse the interactive
 # OAuth WORKOS_CLIENT_ID (in wrangler.jsonc) for either of them.
 
-# bulk-place-agent's app: "Nyuchi Fundi Tester" (org Nyuchi Africa).
-BULK_M2M_CLIENT_ID="client_01KSJT4TC5GW6RHTKMHB3C9500"
+# bulk-place-agent's app: "Kweli Fundi" (org Nyuchi Africa). Not to be
+# confused with "Nyuchi Fundi Tester" — that's an unrelated app for
+# something else entirely.
+BULK_M2M_CLIENT_ID="client_01KZGMK14B53N6Z84GMJFW0ASC"
 BULK_M2M_CLIENT_SECRET="..." # generate in the WorkOS dashboard — not available via the admin API
 
 # single-place-agent's app: "Kweli" (org Nyuchi Africa).
