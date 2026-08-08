@@ -113,7 +113,8 @@ export default {
         const status = await agent.forceRun();
         return json({ taskId: body.taskId, status });
       } catch (e) {
-        return json({ error: String(e) }, 500);
+        console.error("force-run failed", { taskId: body.taskId, error: e instanceof Error ? e.message : String(e) });
+        return json({ error: "could not force-run task" }, 500);
       }
     }
 
