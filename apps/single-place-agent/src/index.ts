@@ -1,21 +1,30 @@
 // single-place-agent worker entrypoint — STUB (see agent-do.ts for what's
-// missing). Owns `POST /tasks`, the endpoint apps/mcp-places' `request_place`
-// tool calls over the SINGLE_PLACE_AGENT service binding.
+// missing). Owns `POST /tasks`, independent of the Kweli MCP: any
+// Nyuchi/Mukoko app can call it directly with its own WorkOS M2M
+// client_credentials token (this agent's own dedicated client_id/secret
+// pair, stored in the calling app's own secrets). Unlike bulk-place-agent,
+// there is no organization restriction here — any validly-signed token for
+// this agent's client_id is accepted.
 
 import { getAgentByName } from "agents";
+import { m2mConfig, verifyM2M, denyResponse } from "@kweli-mcp/workos-m2m";
 import { SinglePlaceAgent, type SinglePlaceRequest } from "./agent-do";
 
 export { SinglePlaceAgent };
-
-interface Env {
-  SINGLE_PLACE_AGENT: DurableObjectNamespace<SinglePlaceAgent>;
-}
 
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body, null, 2), {
     status,
     headers: { "content-type": "application/json" },
   });
+}
+
+async function requireM2M(request: Request, env: Env): Promise<Response | null> {
+  const cfg = m2mConfig(env);
+  if (!cfg) return denyResponse(503, "auth not configured");
+  const result = await verifyM2M(request, cfg);
+  if (!result.ok) return denyResponse(result.status ?? 401, result.error ?? "unauthorized");
+  return null;
 }
 
 export default {
@@ -27,6 +36,9 @@ export default {
     }
 
     if (url.pathname === "/tasks" && request.method === "POST") {
+      const denied = await requireM2M(request, env);
+      if (denied) return denied;
+
       const body = (await request.json().catch(() => null)) as SinglePlaceRequest | null;
       if (!body?.name) return json({ error: "name is required" }, 400);
 

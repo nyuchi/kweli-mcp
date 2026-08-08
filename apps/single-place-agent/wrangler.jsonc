@@ -20,5 +20,16 @@
 
   "observability": { "enabled": true },
 
+  "vars": {
+    // WorkOS M2M — this agent's OWN dedicated application, distinct from
+    // bulk-place-agent's. No WORKOS_ALLOWED_ORG_IDS: any caller holding this
+    // client_id/secret pair may call POST /tasks, regardless of org.
+    // TODO: WORKOS_M2M_CLIENT_ID below is a placeholder — register a real
+    // "Single Place Agent" M2M application in the WorkOS dashboard before
+    // first deploy and replace it.
+    "WORKOS_AUTHKIT_DOMAIN": "https://identity.nyuchi.com",
+    "WORKOS_M2M_CLIENT_ID": "client_TODO_REGISTER_SINGLE_PLACE_M2M_APP"
+  },
+
   "dev": { "port": 8792 }
 }
