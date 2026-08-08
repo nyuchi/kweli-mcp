@@ -120,15 +120,27 @@ importers:
 
   apps/single-place-agent:
     dependencies:
+      '@kweli-mcp/mongo':
+        specifier: workspace:*
+        version: link:../../packages/mongo
       '@kweli-mcp/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@kweli-mcp/skills':
+        specifier: workspace:*
+        version: link:../../packages/skills
       '@kweli-mcp/workos-m2m':
         specifier: workspace:*
         version: link:../../packages/workos-m2m
       agents:
         specifier: ^0.16.2
         version: 0.16.2(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@cloudflare/workers-types@5.20260808.1)(ai@6.0.246(zod@4.4.3))(react@19.2.8)(rolldown@1.2.3)(vite@8.2.1(@types/node@25.9.5)(esbuild@0.28.1)(yaml@2.9.0))(zod@4.4.3)
+      bson:
+        specifier: 7.2.0
+        version: 7.2.0
+      mongodb:
+        specifier: 7.2.0
+        version: 7.2.0(@mongodb-js/zstd@7.0.0)
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^5.20260801.1

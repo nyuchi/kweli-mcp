@@ -1,10 +1,12 @@
-// single-place-agent worker entrypoint — STUB (see agent-do.ts for what's
-// missing). Owns `POST /tasks`, independent of the Kweli MCP: any
-// Nyuchi/Mukoko app can call it directly with its own WorkOS M2M
-// client_credentials token (this agent's own dedicated client_id/secret
-// pair, stored in the calling app's own secrets). Unlike bulk-place-agent,
-// there is no organization restriction here — any validly-signed token for
-// this agent's client_id is accepted.
+// single-place-agent worker entrypoint. Owns `POST /tasks`, independent of
+// the Kweli MCP: any Nyuchi/Mukoko app can call it directly with its own
+// WorkOS M2M client_credentials token (this agent's own dedicated
+// client_id/secret pair, stored in the calling app's own secrets). Unlike
+// bulk-place-agent, there is no organization restriction here — any
+// validly-signed token for this agent's client_id is accepted.
+//
+// Runs synchronously (no queue): resolve → Overpass check → write, all
+// within the request. See agent-do.ts for the resolution logic.
 
 import { getAgentByName } from "agents";
 import { m2mConfig, verifyM2M, denyResponse } from "@kweli-mcp/workos-m2m";
@@ -32,7 +34,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/health") {
-      return json({ ok: true, worker: "kweli-single-place-agent", status: "stub" });
+      return json({ ok: true, worker: "kweli-single-place-agent" });
     }
 
     if (url.pathname === "/tasks" && request.method === "POST") {
@@ -49,7 +51,7 @@ export default {
         crypto.randomUUID(),
       );
       const result = await agent.submit(body);
-      return json(result, 202);
+      return json(result, result.status === "done" ? 201 : 422);
     }
 
     return json({ error: "not found" }, 404);

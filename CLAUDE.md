@@ -66,15 +66,20 @@ apps/
                                  workers/fundi-ingestion agent runtime — this is
                                  the piece that must actually work, not a stub.
 
-  single-place-agent/           The single place generator — STUB. Creates
+  single-place-agent/           The single place generator — working. Creates
                                  exactly one named place on request instead of
                                  an area sweep — the gap a cross-repo audit
                                  found (nhimbe's "create an event for your
                                  company" flow needs this, not bulk seeding).
-                                 Owns its own public POST /tasks too, WorkOS M2M
-                                 gated but with NO org restriction — a
-                                 deliberately different M2M application than
-                                 bulk-place-agent's. See its agent-do.ts TODO.
+                                 Runs synchronously within the request (no
+                                 queue): resolve coordinates (direct or
+                                 geocoded), a tight Overpass check for an
+                                 existing OSM match, then write via
+                                 @kweli-mcp/skills. Owns its own public
+                                 POST /tasks too, WorkOS M2M gated but with NO
+                                 org restriction — a deliberately different
+                                 M2M application ("Kweli") than
+                                 bulk-place-agent's ("Kweli Fundi").
 
   verification-review-agent/    STUB. Assists (never replaces) human review of
                                  entity.representativeClaims. Never writes

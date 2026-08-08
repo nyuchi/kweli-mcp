@@ -17,8 +17,9 @@ apps/
                                 and place generation, WorkOS OAuth-gated
   bulk-place-agent/            Bulk region/country seeding (working) — own
                                 public POST /tasks, WorkOS M2M + org check
-  single-place-agent/          Single named-place creation (STUB) — own
-                                public POST /tasks, WorkOS M2M, no org check
+  single-place-agent/          Single named-place creation (working,
+                                synchronous) — own public POST /tasks,
+                                WorkOS M2M, no org check
   verification-review-agent/   Claim-review assistant (STUB)
 packages/
   mongo/                       Shared Mongo client + verification-tier ladder

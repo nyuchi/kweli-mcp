@@ -7,6 +7,6 @@
 # Nyuchi/Mukoko app) mints its own token using THIS agent's client_id/secret
 # pair, which lives in the caller's secrets, distinct from bulk-place-agent's.
 
-# No secrets required yet — this agent is a stub (see agent-do.ts's TODO for
-# what the real Overpass/Nominatim/write-records implementation will need,
-# e.g. MONGODB_URI once it starts writing places).
+# MongoDB connection string — the same shared Mukoko cluster bulk-place-agent
+# writes to.
+MONGODB_URI="mongodb+srv://user:pass@cluster.example.mongodb.net/?retryWrites=true&w=majority"
