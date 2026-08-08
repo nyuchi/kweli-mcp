@@ -76,11 +76,12 @@
     "FUNDI_AI_MODEL": "workers-ai/@cf/moonshotai/kimi-k2.6",
     "FUNDI_AI_GATEWAY": "shamwari",
     "FUNDI_BOUNDARY_BBOX": "-36,-26,38,64",
-    // WorkOS M2M — this agent's OWN dedicated application (distinct from
-    // single-place-agent's). Callers authenticate as this client_id via
+    // WorkOS M2M — this agent's OWN dedicated application ("Nyuchi Fundi
+    // Tester", org Nyuchi Africa; distinct from single-place-agent's
+    // "Kweli" app). Callers authenticate as this client_id via
     // client_credentials; only the Nyuchi org may trigger bulk seeding.
     "WORKOS_AUTHKIT_DOMAIN": "https://identity.nyuchi.com",
-    "WORKOS_M2M_CLIENT_ID": "client_01KV0ZZ4DK74YMEDYT22ARM1Y3",
+    "WORKOS_M2M_CLIENT_ID": "client_01KSJT4TC5GW6RHTKMHB3C9500",
     "WORKOS_ALLOWED_ORG_IDS": "org_01KRDAB894DJF5V38PT5617TV1"
   },
 

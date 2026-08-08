@@ -11,10 +11,11 @@ COOKIE_ENCRYPTION_KEY="..."
 # client_id/secret, exactly like any other Nyuchi/Mukoko app calling them.
 # Never share these between the two agents, and never reuse the interactive
 # OAuth WORKOS_CLIENT_ID (in wrangler.jsonc) for either of them.
-BULK_M2M_CLIENT_ID="client_01KV0ZZ4DK74YMEDYT22ARM1Y3"
-BULK_M2M_CLIENT_SECRET="..."
 
-# TODO: register a real "Single Place Agent" M2M application in WorkOS (see
-# apps/single-place-agent/wrangler.jsonc's matching TODO) and replace both.
-SINGLE_M2M_CLIENT_ID="client_TODO_REGISTER_SINGLE_PLACE_M2M_APP"
-SINGLE_M2M_CLIENT_SECRET="..."
+# bulk-place-agent's app: "Nyuchi Fundi Tester" (org Nyuchi Africa).
+BULK_M2M_CLIENT_ID="client_01KSJT4TC5GW6RHTKMHB3C9500"
+BULK_M2M_CLIENT_SECRET="..." # generate in the WorkOS dashboard — not available via the admin API
+
+# single-place-agent's app: "Kweli" (org Nyuchi Africa).
+SINGLE_M2M_CLIENT_ID="client_01KZG8V8VVS6268W1ERMW7YBNE"
+SINGLE_M2M_CLIENT_SECRET="..." # generate in the WorkOS dashboard — not available via the admin API

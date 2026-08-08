@@ -60,12 +60,13 @@
     "WORKOS_ORGANIZATION_ID": "org_01KRDAB894DJF5V38PT5617TV1",
     "WORKOS_ALLOWED_ORG_IDS": "org_01KRDAB894DJF5V38PT5617TV1",
     "WORKOS_REQUIRED_PERMISSION": "mongodb:access",
-    // Outbound M2M client_id for calling bulk-place-agent (its secret is a
-    // `wrangler secret put BULK_M2M_CLIENT_SECRET`, never a var).
-    "BULK_M2M_CLIENT_ID": "client_01KV0ZZ4DK74YMEDYT22ARM1Y3",
-    // TODO: register a real "Single Place Agent" M2M application in WorkOS
-    // (see apps/single-place-agent/wrangler.jsonc's matching TODO).
-    "SINGLE_M2M_CLIENT_ID": "client_TODO_REGISTER_SINGLE_PLACE_M2M_APP"
+    // Outbound M2M client_id for calling bulk-place-agent ("Nyuchi Fundi
+    // Tester" — its secret is a `wrangler secret put BULK_M2M_CLIENT_SECRET`,
+    // never a var).
+    "BULK_M2M_CLIENT_ID": "client_01KSJT4TC5GW6RHTKMHB3C9500",
+    // Outbound M2M client_id for calling single-place-agent ("Kweli" — its
+    // secret is a `wrangler secret put SINGLE_M2M_CLIENT_SECRET`).
+    "SINGLE_M2M_CLIENT_ID": "client_01KZG8V8VVS6268W1ERMW7YBNE"
   },
 
   "dev": { "port": 8789 }

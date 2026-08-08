@@ -187,7 +187,10 @@ pnpm --filter <app> dev       # wrangler dev for one app
 pnpm --filter <app> deploy    # wrangler deploy for one app
 ```
 
-See each app's own `.dev.vars.example` for required secrets, including the
-`TODO` in `single-place-agent`'s and `apps/mcp`'s WorkOS config — the
-single-place M2M application still needs to be registered for real in the
-WorkOS dashboard before first deploy.
+See each app's own `.dev.vars.example` for required secrets. Both agents'
+WorkOS M2M applications are registered for real (`bulk-place-agent` = "Nyuchi
+Fundi Tester", `single-place-agent` = "Kweli", both org Nyuchi Africa) —
+what's still outstanding is generating each app's client secret in the
+WorkOS dashboard (deliberately not exposed via the admin API) and setting it
+as `BULK_M2M_CLIENT_SECRET` / `SINGLE_M2M_CLIENT_SECRET` on `apps/mcp` before
+first deploy.

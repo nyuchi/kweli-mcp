@@ -29,11 +29,20 @@ agreed migration mode ("copy now, remove from kweli later"):
      deployed here and verified against a real task end-to-end (submit →
      queue → DO → Mongo write → D1 status), including a real WorkOS M2M
      round-trip (mint → verify) for each agent.
-  2. Two more WorkOS M2M applications are registered for real:
-     `single-place-agent`'s (currently a `TODO` placeholder client_id in its
-     `wrangler.jsonc` and in `apps/mcp`'s `.dev.vars.example`) and confirming
-     `bulk-place-agent`'s reuses the existing `WORKOS_AGENTS_M2M_CLIENT_ID`
-     app from the original fundi-ingestion config, not a new one.
+  2. ~~Two more WorkOS M2M applications are registered for real~~ **Done.**
+     `bulk-place-agent` uses the existing **"Nyuchi Fundi Tester"** M2M app
+     (`client_01KSJT4TC5GW6RHTKMHB3C9500`, org Nyuchi Africa) — note this is
+     a *different* client_id than the original fundi-ingestion config's
+     `WORKOS_AGENTS_M2M_CLIENT_ID` comment claimed
+     (`client_01KV0ZZ4DK74YMEDYT22ARM1Y3`, which turned out not to exist in
+     either WorkOS environment — corrected here). `single-place-agent` gets
+     a brand-new dedicated app, **"Kweli"**
+     (`client_01KZG8V8VVS6268W1ERMW7YBNE`, also org Nyuchi Africa, no org
+     restriction enforced at the agent). **Still outstanding:** a human must
+     generate each app's client secret in the WorkOS dashboard — that step
+     is deliberately not exposed via the admin API/MCP surface — and set it
+     as `BULK_M2M_CLIENT_SECRET` / `SINGLE_M2M_CLIENT_SECRET` on `apps/mcp`
+     (and on any other app that calls these agents directly).
   3. The D1 database (`fundi-ingestion-ledger`, id
      `1ca0ed44-20fc-4cd5-a6c1-86b40daf1041`) and KV namespace
      (`fundi-ingestion-tasks` dedup, id `7e726479ef2048c5b12e51bf1cc25141`)
