@@ -108,6 +108,14 @@ packages/
                (enrichment), write-records (the actual Mongo place+entity
                write). Consumed by bulk-place-agent (all of them) and apps/mcp
                (overpass + resolve-hierarchy, for its read tools).
+  telemetry/   OpenTelemetry-shaped tracing + structured logging. W3C
+               traceparent propagation (trace-context.ts), spans and log
+               records (tracer.ts), and pluggable sinks (sinks.ts: JSON
+               stdout, the D1 `agent_events` table, OTLP/HTTP). Zero runtime
+               dependencies — the OTel SDK is heavy in a Workers isolate for
+               what is, at this scale, one header and a JSON write, but the
+               wire format stays OTLP-compatible so a real exporter is
+               additive. Consumed by apps/mcp and both generation agents.
   workos-m2m/  WorkOS client_credentials, both sides: verify.ts (agent side —
                bulk-place-agent and single-place-agent check an inbound
                token) and mint.ts (caller side — apps/mcp, or any other
@@ -180,6 +188,21 @@ implemented.
 8. **Deploy order matters on first deploy**: `bulk-place-agent` and
    `single-place-agent` before `apps/mcp`, since the latter declares
    `[[services]]` bindings pointing at the former two by worker name.
+9. **Telemetry goes in ONE `agent_events` table, never one per agent.**
+   `service_name` gives the per-agent view with a `WHERE` clause; `trace_id`
+   is what lets a single user action be reconstructed across every service it
+   touched. Table-per-agent optimises the easy query and turns the hard one
+   ("why did *this request* fail?") into a UNION that grows with every new
+   agent — and D1 serialises writes per *database*, not per table, so
+   splitting buys no throughput either. Never log with bare `console.*` in a
+   new call site: use a `Tracer`, so the event carries trace identity.
+10. **Trace context must be carried explicitly across every non-HTTP hop.**
+    An HTTP call propagates via the `traceparent` header (`tracer.fetch` /
+    `tracer.outboundHeaders` do this for you), but a **Durable Object method
+    call** and a **queue message** have no headers — so `SinglePlaceAgent.submit`
+    takes a `traceparent` argument and `SeedTask` carries a `traceId` field
+    (persisted to `tasks.trace_id`). Drop either and the trace silently breaks
+    exactly where async work begins, which is where you most need it.
 
 ## Commands
 
