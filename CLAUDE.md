@@ -169,6 +169,21 @@ implemented.
    (`WORKOS_CLIENT_ID`). Three distinct WorkOS applications, three distinct
    credential pairs, each app's copy of a given pair lives in that app's own
    secrets.
+
+   > **"fundi" names several unrelated systems. Never match on the name.**
+   >
+   > | Name | What it actually is |
+   > | --- | --- |
+   > | `fundi-ingestion` | OSM place ingestion — the origin of this repo's `bulk-place-agent` |
+   > | **`fundi-tester`** | a **cyber security agent**. Nothing to do with places, ingestion or Kweli |
+   > | "Nyuchi Fundi Tester" (`client_01KSJT4TC5GW6RHTKMHB3C9500`) | `fundi-tester`'s M2M app, shared with `mzizi-mcp` |
+   > | "Kweli Fundi" (`client_01KZGMK14B53N6Z84GMJFW0ASC`) | this repo's `bulk-place-agent` |
+   >
+   > This is a live trap, not a hypothetical: "Nyuchi Fundi Tester" was once
+   > wired into `bulk-place-agent` here purely because the name looked like a
+   > match, which would have pointed a place-ingestion agent at a security
+   > agent's credential. Match on what a thing *does*, and confirm against the
+   > WorkOS app's actual owner — never on a shared word in its name.
 4. **The Africa boundary guard (`packages/shared/africa.ts`) is
    config-driven** (`FUNDI_BOUNDARY_BBOX`), not hardcoded into the ingestion
    engine — lifting to global scope later is a var change, not a rewrite.
